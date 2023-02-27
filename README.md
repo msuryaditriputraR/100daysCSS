@@ -1,3 +1,3 @@
-# 100daysCSS Challanges
+# 100daysCSS Challenges
 
-All Source code of this challange. Free to learn
+All Source code of this challenge. Free to learn
