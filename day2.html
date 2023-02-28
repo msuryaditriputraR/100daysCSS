@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 2 | CSS CHALLENGE</title>
+
+  <style>
+    :root {
+      --bg-container: #3FAF82;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .container {
+      padding: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: .5rem;
+      background: var(--bg-container);
+      box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+    }
+
+    :root {
+      --menu-icon-line-height: .75rem;
+      --menu-icon-line-space: 1rem;
+      --menu-icon-line-offsetY: calc(var(--menu-icon-line-height) + var(--menu-icon-line-space));
+      --menu-icon-height: calc(calc(3 * var(--menu-icon-line-height)) + calc(2 * var(--menu-icon-line-space)));
+      --cubic-bezier-in: cubic-bezier(0.30, 1, 0.70, 1);
+      /* --cubic-bezier-out: cubic-bezier(1, 0.70, 1, 0.30);  */
+    }
+
+    .menu-icon {
+      width: 80px;
+      height: var(--menu-icon-height);
+      cursor: pointer;
+      z-index: 50;
+    }
+
+    .line-1,
+    .line-2,
+    .line-3 {
+      height: var(--menu-icon-line-height);
+      width: 100%;
+      background-color: #fff;
+      border-radius: 3px;
+      box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+    }
+
+    .line-1 {
+      animation: animate-line-1-rev .7s ease-in-out;
+    }
+
+    .line-2 {
+      margin: var(--menu-icon-line-space) 0;
+      animation: animate-line-2-rev .7s ease-in-out;
+    }
+
+    .line-3 {
+      animation: animate-line-3-rev .7s ease-in-out;
+    }
+
+    /* ==================== ACTIVE ===================== */
+    .menu-icon.active .line-1 {
+      animation: animate-line-1 .7s var(--cubic-bezier-in) forwards;
+    }
+
+    .menu-icon.active .line-2 {
+      animation: animate-line-2 .7s var(--cubic-bezier-in) forwards;
+    }
+
+    .menu-icon.active .line-3 {
+      animation: animate-line-3 .7s var(--cubic-bezier-in) forwards;
+
+    }
+
+    /* ==================== NO ANIMATION BEFORE CLICKED ===================== */
+    .no-animation {
+      animation: none !important;
+    }
+
+    /* ==================== ANIMATION X ===================== */
+    @keyframes animate-line-1 {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0);
+      }
+
+      50% {
+        transform: translate3d(0, var(--menu-icon-line-offsetY), 0) rotate(0);
+      }
+
+      100% {
+        transform: translate3d(0, var(--menu-icon-line-offsetY), 0) rotate(45deg);
+      }
+    }
+
+    @keyframes animate-line-2 {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes animate-line-3 {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+
+      50% {
+        transform: translate3d(0, calc(var(--menu-icon-line-offsetY) * -1), 0) rotate(0);
+      }
+
+      100% {
+        transform: translate3d(0, calc(var(--menu-icon-line-offsetY) * -1), 0) rotate(135deg);
+      }
+    }
+
+    /* ==================== ANIMATION MENU ===================== */
+
+    @keyframes animate-line-1-rev {
+      0% {
+        transform: translate3d(0, var(--menu-icon-line-offsetY), 0) rotate(45deg);
+      }
+
+      50% {
+        transform: translate3d(0, var(--menu-icon-line-offsetY), 0) rotate(0);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) rotate(0);
+      }
+    }
+
+    @keyframes animate-line-2-rev {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes animate-line-3-rev {
+      0% {
+        transform: translate3d(0, calc(var(--menu-icon-line-offsetY) * -1), 0) rotate(135deg);
+      }
+
+      50% {
+        transform: translate3d(0, calc(var(--menu-icon-line-offsetY) * -1), 0) rotate(0);
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) rotate(0);
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="menu-icon">
+      <div class="line-1 no-animation"></div>
+      <div class="line-2 no-animation"></div>
+      <div class="line-3 no-animation"></div>
+    </div>
+
+    <script>
+      document.querySelector(".menu-icon").addEventListener('click', function () {
+        this.classList.toggle('active');
+
+        this.querySelectorAll('div').forEach((d) => d.classList.remove('no-animation'))
+      })
+    </script>
+
+</body>
+
+</html>
