@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAY 5 | CSS CHALLENGE</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:600,400");
+
+    :root {
+      --bg-container: #42A7A1;
+      --red: #FA7373;
+      --blue: #7BA2FF;
+    }
+
+    body {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: 'Open Sans', Helvetica, sans-serif;
+      background: var(--bg-container);
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: .5rem;
+      box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      width: 300px;
+    }
+
+    .header {
+      background: #F1BA64;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    .header div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header div:last-child {
+      align-items: flex-end;
+    }
+
+    .big {
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .small {
+      font-weight: 400;
+      font-size: .685rem;
+    }
+
+    .parameter {
+      text-align: right;
+      padding-block: .5rem;
+    }
+
+    .parameter span {
+      font-size: .685rem;
+      color: #606060;
+      display: inline-block;
+      margin-inline: 1rem;
+      position: relative;
+    }
+
+    .parameter span:before {
+      content: '';
+      position: absolute;
+      left: -1.25rem;
+      top: 40%;
+      width: .85rem;
+      height: 6.5px;
+      border-radius: .25rem;
+    }
+
+    .parameter-red:before {
+      background: var(--red);
+    }
+
+    .parameter-blue:before {
+      background: var(--blue);
+    }
+
+    .statistic {
+      position: relative;
+      height: 81px;
+      width: 260px;
+      margin: .85rem auto;
+    }
+
+    .line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #d1d1d1;
+    }
+
+    .line-2 {
+      top: 40px;
+    }
+
+    .line-3 {
+      top: inherit;
+      bottom: 0;
+    }
+
+    .data svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    polyline {
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    .data.red polyline {
+      stroke: var(--red);
+    }
+
+    .data.blue polyline {
+      stroke: var(--blue);
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 13px;
+      left: 50%;
+      transform: translate3d(-50%, 10px, 0);
+      font-weight: 600;
+      font-size: 11px;
+      line-height: 11px;
+      color: #fff;
+      padding: 8px 6px;
+      border-radius: 3px;
+      visibility: hidden;
+      opacity: 0;
+      transition: transform 0.4s ease-out 0s, opacity 0.4s ease-out 0s;
+    }
+
+    .tooltip:after {
+      position: absolute;
+      display: block;
+      content: '';
+      height: 6px;
+      width: 6px;
+      left: 50%;
+      margin-left: -3px;
+      bottom: -3px;
+      transform: rotate(45deg);
+    }
+
+    [class^="point-"] {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    [class^="point-"]:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+      transform: translate3d(-50%, 0, 0);
+    }
+
+    .data.red [class^="point-"],
+    .data.red .tooltip,
+    .data.red .tooltip:after {
+      background: var(--red);
+    }
+
+    .data.red .point-1 {
+      left: 7px;
+      top: 43px;
+    }
+
+    .data.red .point-2 {
+      left: 48px;
+      top: 9px;
+    }
+
+    .data.red .point-3 {
+      left: 88px;
+      top: 20px;
+    }
+
+    .data.red .point-4 {
+      left: 128px;
+      top: 8px;
+    }
+
+    .data.red .point-5 {
+      left: 169px;
+      top: 35px;
+    }
+
+    .data.red .point-6 {
+      left: 209px;
+      top: 45px;
+    }
+
+    .data.red .point-7 {
+      left: 249px;
+      top: 16px;
+    }
+
+    .data.blue [class^="point-"],
+    .data.blue .tooltip,
+    .data.blue .tooltip:after {
+      background: var(--blue);
+    }
+
+    .data.blue .point-1 {
+      left: 7px;
+      top: 58px;
+    }
+
+    .data.blue .point-2 {
+      left: 48px;
+      top: 47px;
+    }
+
+    .data.blue .point-3 {
+      left: 88px;
+      top: 62px;
+    }
+
+    .data.blue .point-4 {
+      left: 128px;
+      top: 52px;
+    }
+
+    .data.blue .point-5 {
+      left: 169px;
+      top: 58px;
+    }
+
+    .data.blue .point-6 {
+      left: 209px;
+      top: 71px;
+    }
+
+    .data.blue .point-7 {
+      left: 249px;
+      top: 61px;
+    }
+
+    .days {
+      display: flex;
+      justify-content: space-evenly;
+      margin-block: .5rem;
+    }
+
+    .day {
+      color: #949494;
+      font-size: .65rem;
+      text-transform: uppercase;
+    }
+  </style>
+
+</head>
+
+<body>
+  <main>
+    <div class="card">
+      <header class="header">
+        <div>
+          <span class="title big">Weekly report</span>
+          <span class="date small">06 March - 12 March</span>
+        </div>
+        <div>
+          <span class="type small">Revenue</span>
+          <span class="value big">$ 3621.79</span>
+        </div>
+      </header>
+      <div class="parameter">
+        <span class="parameter-red">Views</span>
+        <span class="parameter-blue">Purchases</span>
+      </div>
+      <div class="statistic">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+        <div class="data red">
+          <svg>
+            <polyline points="9,46 50,12 90,23 130,11 171, 38 211,48 251,19"></polyline>
+          </svg>
+          <div class="points">
+            <div class="point-1">
+              <div class="tooltip">458</div>
+            </div>
+            <div class="point-2">
+              <div class="tooltip">812</div>
+            </div>
+            <div class="point-3">
+              <div class="tooltip">746</div>
+            </div>
+            <div class="point-4">
+              <div class="tooltip">877</div>
+            </div>
+            <div class="point-5">
+              <div class="tooltip">517</div>
+            </div>
+            <div class="point-6">
+              <div class="tooltip">434</div>
+            </div>
+            <div class="point-7">
+              <div class="tooltip">458</div>
+            </div>
+          </div>
+        </div>
+        <div class="data blue">
+          <svg>
+            <polyline points="9,61 50,50 90,65 130,55 171,61 211,74 251,64"></polyline>
+          </svg>
+          <div class="points">
+            <div class="point-1">
+              <div class="tooltip">26</div>
+            </div>
+            <div class="point-2">
+              <div class="tooltip">41</div>
+            </div>
+            <div class="point-3">
+              <div class="tooltip">22</div>
+            </div>
+            <div class="point-4">
+              <div class="tooltip">36</div>
+            </div>
+            <div class="point-5">
+              <div class="tooltip">25</div>
+            </div>
+            <div class="point-6">
+              <div class="tooltip">13</div>
+            </div>
+            <div class="point-7">
+              <div class="tooltip">20</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="days">
+        <span class="day">Mon</span>
+        <span class="day">Tue</span>
+        <span class="day">Wed</span>
+        <span class="day">Thu</span>
+        <span class="day">Fri</span>
+        <span class="day">Sat</span>
+        <span class="day">Sun</span>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
