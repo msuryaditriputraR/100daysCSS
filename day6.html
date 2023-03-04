@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAY 6 | CSS CHALLENGE</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Open+Sans:600,300");
+
+    :root {
+      --brown: #786450;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    main {
+      background: linear-gradient(to top right, #EEBE6C 0%, #CA7C4E 100%);
+      color: var(--brown);
+      font-family: 'Open Sans', Helvetica, sans-serif;
+
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+    }
+
+    .card {
+      height: 300px;
+      width: 350px;
+      background: #fff;
+      border-radius: .5rem;
+      overflow: hidden;
+      box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.1);
+
+      display: flex;
+    }
+
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-basis: 60%;
+      text-align: center;
+    }
+
+    .image {
+      position: relative;
+    }
+
+    .image:hover {
+      cursor: pointer;
+    }
+
+    .image img {
+      display: block;
+      border-radius: 50%;
+      background: #F5E8DF;
+    }
+
+    .circle {
+      position: absolute;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 50%;
+      transition: all 1.5s ease-in-out;
+    }
+
+    .circle-1 {
+      width: 76px;
+      height: 76px;
+      top: -3px;
+      left: -3px;
+      border-color: var(--brown) var(--brown) var(--brown) transparent;
+    }
+
+    .circle-2 {
+      width: 82px;
+      height: 82px;
+      top: -6px;
+      left: -6px;
+      border-color: var(--brown) transparent var(--brown) var(--brown);
+    }
+
+    .image:hover .circle-1 {
+      transform: rotate(360deg);
+    }
+
+    .image:hover .circle-2 {
+      transform: rotate(-360deg);
+    }
+
+    .name {
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 20px;
+    }
+
+    .job {
+      font-size: 11px;
+      line-height: 15px;
+    }
+
+    .actions {
+      margin-top: 33px;
+      display: flex;
+      flex-direction: column;
+      row-gap: .8rem;
+    }
+
+    .btn {
+      padding: .5rem 1.65rem;
+      background: none;
+      border: 1px solid var(--brown);
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all .3s ease-in-out;
+      color: var(--brown);
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--brown);
+      color: #fff;
+    }
+
+    .stats {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      row-gap: 1px;
+    }
+
+    .box {
+      flex-basis: 33%;
+      background: #F5E8DF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all .4s ease-in-out;
+      cursor: default;
+    }
+
+    .box:hover {
+      background: #E1CFC2;
+    }
+
+    .box span {
+      display: block;
+    }
+
+    .value {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .parameter {
+      font-size: 11px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="card">
+      <div class="profile">
+        <div class="image">
+          <div class="circle circle-1"></div>
+          <div class="circle circle-2"></div>
+          <img
+            src="https://scontent.fupg6-1.fna.fbcdn.net/v/t39.30808-1/292975142_3356568531282960_3728263189233041253_n.jpg?stp=dst-jpg_p320x320&_nc_cat=107&ccb=1-7&_nc_sid=7206a8&_nc_eui2=AeG1JnLf4CQdt5EGGb9T0-Wcjzfd_KYLzmaPN938pgvOZnEmwckAGpC2eUdmMrG9oObt4YVA3XBnxdaOa9knZPnY&_nc_ohc=cOfo0B0lZSIAX90-bW3&_nc_ht=scontent.fupg6-1.fna&oh=00_AfBceXBG55zaVji78ooS85CXhONO9p3kWuP6eMFcOSdKag&oe=64076910"
+            width="70" height="70" alt="Jessica Potter">
+        </div>
+
+        <div class="name">Muh Suryadi Triputra R</div>
+        <div class="job">Front-End Developer</div>
+
+        <div class="actions">
+          <button class="btn">Follow</button>
+          <button class="btn">Message</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="box">
+          <span class="value">12</span>
+          <span class="parameter">Posts</span>
+        </div>
+        <div class="box">
+          <span class="value">2645</span>
+          <span class="parameter">Likes</span>
+        </div>
+        <div class="box">
+          <span class="value">1548</span>
+          <span class="parameter">Follower</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
